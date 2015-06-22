@@ -8,12 +8,8 @@ class BooksCraw
   def download!(dir = 'downloads')
     FileUtils::mkdir_p dir
     @book_links.each do |link|
-      begin
-        @browser.download link[:href], "#{dir}/#{link[:title]}.#{@format}"
-        puts "-----> #{link[:title]}"
-      rescue Mechanize::ResponseCodeError
-        warn "Erro - #{link[:title]}"
-      end
+      filename = "#{dir}/#{link[:title]}.#{@format}"
+      download_or_keep filename, link[:href], link[:title]
     end
     @book_links = []
   end
@@ -25,6 +21,21 @@ class BooksCraw
         title: page.search('[itemprop=name]').text,
         href: page.link_with(href: %r{#{@format}$}).href
       }
+    end
+  end
+
+  private
+
+  def download_or_keep(filename, href, title)
+    if File.exists?(filename)
+      puts "!----- #{title}"
+    else
+      begin
+        @browser.download href, filename
+        puts "-----> #{title}"
+      rescue Mechanize::ResponseCodeError
+        warn "Erro - #{title}"
+      end
     end
   end
 end
