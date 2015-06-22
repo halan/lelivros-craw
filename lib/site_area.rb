@@ -14,15 +14,6 @@ class SiteAreaCraw
       @url = page_craw.next_page_url
     end while page_craw.next_page
   end
-
-  def download!
-    @books.download!
-  end
-
-  def pages
-    page = @browser.get @initial_page
-    page.link_with(class: 'last').href[/([0-9]+)\//, 1].to_i
-  end
 end
 
 
