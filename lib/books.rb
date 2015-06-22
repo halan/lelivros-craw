@@ -1,5 +1,6 @@
 class BooksCraw
-  def initialize()
+  def initialize(format = 'mobi')
+    @format = format
     @book_links = []
     @browser = Mechanize.new
   end
@@ -8,7 +9,7 @@ class BooksCraw
     FileUtils::mkdir_p dir
     @book_links.each do |link|
       begin
-        @browser.download link[:href], "#{dir}/#{link[:title]}.mobi"
+        @browser.download link[:href], "#{dir}/#{link[:title]}.#{@format}"
         puts "-----> #{link[:title]}"
       rescue Mechanize::ResponseCodeError
         warn "Erro - #{link[:title]}"
@@ -26,7 +27,7 @@ class BooksCraw
       page = @browser.get(page_link)
       {
         title: page.search('[itemprop=name]').text,
-        href: page.link_with(href: /mobi$/).href
+        href: page.link_with(href: %r{#{@format}$}).href
       }
     end
   end
