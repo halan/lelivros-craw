@@ -5,7 +5,7 @@ class PageCraw
 
   def links
     @page.search('.product').reject do |li|
-      Dir["downloads/**/#{li.search('h3').text.gsub('/', '|')}.mobi"].any?
+      Dir["downloads/*/#{li.search('h3').text.gsub('/', '|')}.mobi"].any?
     end.map{|li| li.search('[data-product_id]').first[:href] }
   end
 
