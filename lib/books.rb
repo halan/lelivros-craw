@@ -18,10 +18,6 @@ class BooksCraw
     @book_links = []
   end
 
-  def length
-    @book_links.length
-  end
-
   def append(page_links)
     @book_links += page_links.map do |page_link|
       page = @browser.get(page_link)
