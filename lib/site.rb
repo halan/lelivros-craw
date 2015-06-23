@@ -8,8 +8,7 @@ class SiteCraw
     craw_areas!
     @areas.each do |area|
       puts "===> #{area[:title]}"
-      a = SiteAreaCraw.new(area[:href], area[:title])
-      a.craw!
+      SiteAreaCraw.new(area[:href], area[:title]).craw!
     end
   end
 
