@@ -26,3 +26,7 @@ bundle exec rake category[http://lelivros.red/categoria/filosofia/,Filosofia]
 ```
 bundle exec rake category[http://lelivros.red/categoria/filosofia/,Filosofia,epub]
 ```
+
+# Ubuntu (emojis)
+
+https://gist.github.com/robotslave/4633393

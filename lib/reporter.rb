@@ -8,32 +8,32 @@ class Reporter
   end
 
   def start_area(title)
-    puts Colors.blue "===> #{title}"
+    puts Colors.blue "  📂  #{title}"
     @areas << title
   end
 
   def download_ok(title)
-    puts Colors::green "-----> #{title}"
+    puts Colors::green "\t📗  #{title}"
     @successes << title
   end
 
   def download_error(title)
-    warn Colors::red "Erro - #{title}"
+    warn Colors::red "\t❌ #{title}"
     @errors << title
   end
 
   def download_exists(title)
-    puts Colors::brown "!----- #{title}"
+    puts Colors::brown "\t📙  #{title}"
     @duplicateds << title
   end
 
   def summary
     puts ''
     puts [
-      summary_message('Successes', @successes.count, :green),
-      summary_message('Errors', @errors.count, :red),
-      summary_message('Duplicateds', @duplicateds.count, :brown),
-      summary_message('Categories', @areas.count, :blue)
+      summary_message('📗 ', @successes.count, :green),
+      summary_message('❌ ', @errors.count, :red),
+      summary_message('📙 ', @duplicateds.count, :brown),
+      summary_message('📂 ', @areas.count, :blue)
     ].compact.join ' | '
     puts "Finished in #{Time.now - @start_at} seconds."
   end
@@ -45,7 +45,7 @@ class Reporter
   private
 
   def summary_message label, count, color
-    "#{label}: #{Colors::send color, count}" unless count.zero?
+    "#{label} #{Colors::send color, count}" unless count.zero?
   end
 
   module Colors
