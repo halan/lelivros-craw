@@ -38,6 +38,10 @@ class Reporter
     puts "Finished in #{Time.now - @start_at} seconds."
   end
 
+  def stop
+    puts "\r Stop crawler... :)"
+  end
+
   private
 
   def summary_message label, count, color

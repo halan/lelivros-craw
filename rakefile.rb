@@ -10,7 +10,7 @@ task :default, [:format]  do |t, args|
   begin
     SiteCraw.new('http://lelivros.red/', args.format, reporter).craw!
   rescue SystemExit, Interrupt
-    puts "\r Stop cralwer... :)"
+    reporter.stop
   end
 
   reporter.summary
@@ -21,8 +21,10 @@ task :category, [:url, :title, :format] do |t, args|
   begin
     SiteAreaCraw.new(args[:url], args[:title], format).craw!
   rescue SystemExit, Interrupt
-    puts "\r Stop cralwer... :)"
+    reporter.stop
   end
+
+  reporter.summary
 end
 
 task :clean_broken do
