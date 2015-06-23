@@ -30,9 +30,9 @@ class Reporter
   def summary
     puts ''
     puts [
-      summary_message('Success', @successes.count, :green),
-      summary_message('Error', @errors.count, :red),
-      summary_message('Duplicated', @duplicateds.count, :brown),
+      summary_message('Successes', @successes.count, :green),
+      summary_message('Errors', @errors.count, :red),
+      summary_message('Duplicateds', @duplicateds.count, :brown),
       summary_message('Categories', @areas.count, :blue)
     ].compact.join ' | '
     puts "Finished in #{Time.now - @start_at} seconds."
