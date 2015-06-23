@@ -1,6 +1,7 @@
 class PageCraw
-  def initialize(page)
+  def initialize(page, format)
     @page = page
+    @format = format
   end
 
   def links
@@ -20,9 +21,10 @@ class PageCraw
   private
 
   def exist?(title)
+    filename = title.format(@format)
     Dir[
-      "downloads/*/#{title.mobi}",
-      "downloads/*/#{title.mobi}\\[error\\].txt",
+      "downloads/*/#{filename}",
+      "downloads/*/#{filename}\\[error\\].txt",
     ].any?
   end
 end

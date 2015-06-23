@@ -2,7 +2,7 @@
 
 ## Usage
 
-Download all
+### Download all (mobi)
 ```
 ./crawler
 ```
@@ -12,7 +12,17 @@ or
 bundle exec rake
 ```
 
-Download just one category
+### Download all (epub)
+```
+bundle exec rake default[epub]
+```
+
+### Download just one category (mobi)
 ```
 bundle exec rake category[http://lelivros.red/categoria/filosofia/,Filosofia]
+```
+
+### Download just one category (epub)
+```
+bundle exec rake category[http://lelivros.red/categoria/filosofia/,Filosofia,epub]
 ```

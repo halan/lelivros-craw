@@ -3,17 +3,19 @@ require './lib/crawler'
 
 Bundler.require
 
-task :default do
+task :default, [:format]  do |t, args|
+  args.with_defaults(:format => 'mobi')
   begin
-    SiteCraw.new('http://lelivros.red/').craw!
+    SiteCraw.new('http://lelivros.red/', args.format).craw!
   rescue SystemExit, Interrupt
     puts "\r Stop cralwer... :)"
   end
 end
 
-task :category, [:url, :title] do |t, args|
+task :category, [:url, :title, :format] do |t, args|
+  args.with_defaults(:format => 'mobi')
   begin
-    SiteAreaCraw.new(args[:url], args[:title]).craw!
+    SiteAreaCraw.new(args[:url], args[:title], format).craw!
   rescue SystemExit, Interrupt
     puts "\r Stop cralwer... :)"
   end

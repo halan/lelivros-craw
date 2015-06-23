@@ -7,10 +7,6 @@ class TitleBook
     "#{strip}.#{s}"
   end
 
-  def mobi
-    format 'mobi'
-  end
-
   def strip
     "#{@title.gsub('/', '|').gsub('[', '\[')}"
   end
