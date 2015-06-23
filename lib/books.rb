@@ -35,6 +35,7 @@ class BooksCraw
         puts "-----> #{title}"
       rescue Mechanize::ResponseCodeError
         warn "Erro - #{title}"
+        File.write "#{filename}[error].txt", href
       end
     end
   end

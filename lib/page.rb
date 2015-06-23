@@ -5,7 +5,7 @@ class PageCraw
 
   def links
     @page.search('.product').reject do |li|
-      Dir["downloads/*/#{li.search('h3').text.gsub('/', '|')}.mobi"].any?
+      exist? li.search('h3').text
     end.map{|li| li.search('[data-product_id]').first[:href] }
   end
 
@@ -15,6 +15,16 @@ class PageCraw
 
   def next_page_url
     next_page.href if next_page
+  end
+
+  private
+
+  def exist?(title)
+    filename = "#{title.gsub('/', '|').gsub('[', '\[')}.mobi"
+    Dir[
+      "downloads/*/#{filename}",
+      "downloads/*/#{filename}\\[error\\].txt",
+    ].any?
   end
 end
 
