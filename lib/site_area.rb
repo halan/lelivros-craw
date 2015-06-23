@@ -8,6 +8,8 @@ class SiteAreaCraw
   end
 
   def craw!
+    puts "===> #{@title}"
+
     begin
       page_craw = PageCraw.new(@browser.get @url)
       @books.append(page_craw.links) and @books.download!("downloads/#{@title}")

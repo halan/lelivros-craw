@@ -9,5 +9,10 @@ require './lib/site'
 
 Bundler.require
 
-SiteCraw.new('http://lelivros.red/').craw!
-#SiteAreaCraw.new('http://lelivros.red/categoria/filosofia/', 'Filosofia').craw!
+task :default do
+  SiteCraw.new('http://lelivros.red/').craw!
+end
+
+task :category, [:url, :title] do |t, args|
+  SiteAreaCraw.new(args[:url], args[:title]).craw!
+end
