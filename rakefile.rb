@@ -11,9 +11,17 @@ require './lib/title_book'
 Bundler.require
 
 task :default do
-  SiteCraw.new('http://lelivros.red/').craw!
+  begin
+    SiteCraw.new('http://lelivros.red/').craw!
+  rescue SystemExit, Interrupt
+    puts "\r Stop cralwer... :)"
+  end
 end
 
 task :category, [:url, :title] do |t, args|
-  SiteAreaCraw.new(args[:url], args[:title]).craw!
+  begin
+    SiteAreaCraw.new(args[:url], args[:title]).craw!
+  rescue SystemExit, Interrupt
+    puts "\r Stop cralwer... :)"
+  end
 end
