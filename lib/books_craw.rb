@@ -36,7 +36,7 @@ class BooksCraw
         @reporter.download_ok(title)
       rescue Mechanize::ResponseCodeError
         @reporter.download_error(title)
-        File.write "#{filename}[error].txt", href
+        BrokenLinks.register(filename, href, title)
       end
     end
   end

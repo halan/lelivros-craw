@@ -6,7 +6,8 @@ class PageCraw
 
   def links
     @page.search('.product').reject do |li|
-      exist? TitleBook.new li.search('h3').text
+      title = TitleBook.new li.search('h3').text
+      BrokenLinks.has?(title) ||  exist?(title)
     end.map{|li| li.search('[data-product_id]').first[:href] }
   end
 
@@ -21,11 +22,7 @@ class PageCraw
   private
 
   def exist?(title)
-    filename = title.format(@format)
-    Dir[
-      "downloads/*/#{filename}",
-      "downloads/*/#{filename}\\[error\\].txt",
-    ].any?
+    Dir["downloads/*/#{title.format(@format)}"].any?
   end
 end
 
