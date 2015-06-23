@@ -20,3 +20,7 @@ task :category, [:url, :title, :format] do |t, args|
     puts "\r Stop cralwer... :)"
   end
 end
+
+task :clean_broken do
+  sh 'rm downloads/broken.yml'
+end
