@@ -4,10 +4,15 @@
 
 Download all
 ```
-rake
+./crawler
+```
+
+or
+```
+bundle exec rake
 ```
 
 Download just one category
 ```
-rake category[http://lelivros.red/categoria/filosofia/,Filosofia]
+bundle exec rake category[http://lelivros.red/categoria/filosofia/,Filosofia]
 ```
