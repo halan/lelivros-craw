@@ -23,8 +23,13 @@ class BrokenLinks
     File.open(@filename, 'w') {|f| f.write @yaml.to_yaml }
   end
 
-  def register(filename, href, title)
-    broken << {title: title.to_s, filename: filename.to_s, href: href.to_s}
+  def register(filename, href, title, page)
+    broken << {
+      title: title.to_s,
+      filename: filename.to_s,
+      href: href.to_s,
+      page: page.to_s
+    }
     save
   end
 
@@ -36,8 +41,8 @@ class BrokenLinks
     @instance ||= new
   end
 
-  def self.register(filename, href, title)
-    instance.register(filename, href, title)
+  def self.register(filename, href, title, page)
+    instance.register(filename, href, title, page)
   end
 
   def self.has?(title)
