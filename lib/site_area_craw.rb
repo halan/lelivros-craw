@@ -1,14 +1,15 @@
 class SiteAreaCraw
-  def initialize(url, title)
+  def initialize(url, title, reporter = Reporter.new)
     @url = url
     @title = title
+    @reporter = reporter
     @initial_page = url
     @browser = Mechanize.new
     @books = BooksCraw.new
   end
 
   def craw!
-    puts "===> #{@title}"
+    @reporter.start_area(@title)
 
     begin
       page_craw = PageCraw.new(@browser.get @url)

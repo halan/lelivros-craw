@@ -1,6 +1,7 @@
 class BooksCraw
-  def initialize(format = 'mobi')
+  def initialize(format = 'mobi', reporter = Reporter.new)
     @format = format
+    @reporter = reporter
     @book_links = []
     @browser = Mechanize.new
   end
@@ -28,17 +29,15 @@ class BooksCraw
 
   def download_or_keep(filename, href, title)
     if File.exists?(filename)
-      puts "!----- #{title}"
+      @reporter.download_exists(title)
     else
       begin
         @browser.download href, filename
-        puts "-----> #{title}"
+        @reporter.download_ok(title)
       rescue Mechanize::ResponseCodeError
-        warn "Erro - #{title}"
+        @reporter.download_error(title)
         File.write "#{filename}[error].txt", href
       end
     end
   end
 end
-
-

@@ -1,12 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler'
-require 'fileutils'
-require './lib/page_craw'
-require './lib/books_craw'
-require './lib/site_area_craw'
-require './lib/site_craw'
-require './lib/title_book'
+require './lib/crawler'
 
 Bundler.require
 
