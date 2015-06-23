@@ -3,20 +3,32 @@ class SiteAreaCraw
     @url = url
     @title = title
     @reporter = reporter
-    @initial_page = url
     @format = format
     @browser = Mechanize.new
-    @books = BooksCraw.new(format, reporter)
   end
 
   def craw!
     @reporter.start_area(@title)
 
-    begin
-      page_craw = PageCraw.new(@browser.get(@url), @format)
-      @books.append(page_craw.links) and @books.download!("downloads/#{@title}")
-      @url = page_craw.next_page_url
-    end while page_craw.next_page
+    all_urls.each do |url|
+      books = BooksCraw.new(@format, @reporter)
+      books.append PageCraw.new(@browser.get(url), @format).links
+      books.download!("downloads/#{@title}")
+    end
+  end
+
+  protected
+
+  def pages_count
+    @pages_count ||= @browser.get(@url).search('.pages').text[/[0-9]+$/].to_i
+  end
+
+  def route_to(number)
+    "#{@url}/page/#{number}"
+  end
+
+  def all_urls
+    @all_urls ||= (1..pages_count).map{|number| route_to(number) }
   end
 end
 
