@@ -14,4 +14,8 @@ class TitleBook
   def strip
     "#{@title.gsub('/', '|').gsub('[', '\[')}"
   end
+
+  def to_s
+    @title
+  end
 end
