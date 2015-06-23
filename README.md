@@ -1,13 +1,13 @@
 # Crawler for Download Lelivro.red books
 
-## Use
+## Usage
 
 Download all
 ```
 rake
 ```
 
-Download juste one category
+Download just one category
 ```
 rake category[http://lelivros.red/categoria/filosofia/,Filosofia]
 ```
