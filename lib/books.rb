@@ -8,7 +8,7 @@ class BooksCraw
   def download!(dir = 'downloads')
     FileUtils::mkdir_p dir
     @book_links.each do |link|
-      filename = "#{dir}/#{link[:title].gsub('/', '|')}.#{@format}"
+      filename = "#{dir}/#{link[:title].format(@format)}"
       download_or_keep filename, link[:href], link[:title]
     end
     @book_links = []
@@ -18,7 +18,7 @@ class BooksCraw
     @book_links += page_links.map do |page_link|
       page = @browser.get(page_link)
       {
-        title: page.search('[itemprop=name]').text,
+        title: TitleBook.new(page.search('[itemprop=name]').text),
         href: page.link_with(href: %r{#{@format}$}).href
       }
     end

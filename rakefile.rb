@@ -6,6 +6,7 @@ require './lib/page'
 require './lib/books'
 require './lib/site_area'
 require './lib/site'
+require './lib/title_book'
 
 Bundler.require
 
