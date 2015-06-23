@@ -9,4 +9,5 @@ require './lib/site'
 
 Bundler.require
 
-@site = SiteCraw.new('http://lelivros.red/').craw!
+SiteCraw.new('http://lelivros.red/').craw!
+#SiteAreaCraw.new('http://lelivros.red/categoria/filosofia/', 'Filosofia').craw!
