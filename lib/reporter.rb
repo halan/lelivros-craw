@@ -4,6 +4,7 @@ class Reporter
     @errors = []
     @duplicateds = []
     @areas = []
+    @start_at = Time.now
   end
 
   def start_area(title)
@@ -34,6 +35,7 @@ class Reporter
       summary_message('Duplicated', @duplicateds.count, :brown),
       summary_message('Categories', @areas.count, :blue)
     ].compact.join ' | '
+    puts "Finished in #{Time.now - @start_at} seconds."
   end
 
   private
