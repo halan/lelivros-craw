@@ -5,11 +5,15 @@ Bundler.require
 
 task :default, [:format]  do |t, args|
   args.with_defaults(:format => 'mobi')
+  reporter = Reporter.new
+
   begin
-    SiteCraw.new('http://lelivros.red/', args.format).craw!
+    SiteCraw.new('http://lelivros.red/', args.format, reporter).craw!
   rescue SystemExit, Interrupt
     puts "\r Stop cralwer... :)"
   end
+
+  reporter.summary
 end
 
 task :category, [:url, :title, :format] do |t, args|

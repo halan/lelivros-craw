@@ -6,7 +6,7 @@ class SiteAreaCraw
     @initial_page = url
     @format = format
     @browser = Mechanize.new
-    @books = BooksCraw.new(format)
+    @books = BooksCraw.new(format, reporter)
   end
 
   def craw!
