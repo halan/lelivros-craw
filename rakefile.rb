@@ -18,8 +18,10 @@ end
 
 task :category, [:url, :title, :format] do |t, args|
   args.with_defaults(:format => 'mobi')
+  reporter = Reporter.new
+
   begin
-    SiteAreaCraw.new(args[:url], args[:title], format).craw!
+    SiteAreaCraw.new(args[:url], args[:title], args[:format]).craw!
   rescue SystemExit, Interrupt
     reporter.stop
   end
