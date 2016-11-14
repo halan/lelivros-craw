@@ -3,12 +3,14 @@ require './lib/crawler'
 
 Bundler.require
 
+DOMAIN = "http://lelivros.top/"
+
 task :default, [:format]  do |t, args|
-  args.with_defaults(:format => 'mobi')
+  args.with_defaults(format: 'mobi', url: DOMAIN)
   reporter = Reporter.new
 
   begin
-    SiteCraw.new('http://lelivros.red/', args.format, reporter).craw!
+    SiteCraw.new(args.url, args.format, reporter).craw!
   rescue SystemExit, Interrupt
     reporter.stop
   end
